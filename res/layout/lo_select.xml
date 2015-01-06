@@ -1,0 +1,66 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/yellow"
+    android:orientation="vertical" >
+
+    <!-- 音声選択の左右ボタン -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/padding_size_S"
+        android:paddingTop="@dimen/padding_size_S" >
+
+        <Button
+            android:id="@+id/bt_l"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_button_sound_back"
+            android:onClick="TO_LEFT"
+            android:text="@string/main_text01"
+            android:textColor="@color/bt_main_text"
+            android:textSize="@dimen/font_size_SS" />
+
+        <TextView
+            android:id="@+id/sound_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="@dimen/padding_size_S"
+            android:paddingTop="@dimen/padding_size_S"
+            android:text="@string/navibar_main"
+            android:textColor="@color/navibar_text"
+            android:textSize="@dimen/font_size_S" />
+
+        <Button
+            android:id="@+id/bt_r"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_button_sound_next"
+            android:onClick="TO_RIGHT"
+            android:text="@string/main_text01"
+            android:textColor="@color/bt_main_text"
+            android:textSize="@dimen/font_size_SS" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/padding_size_S"
+        android:paddingTop="@dimen/padding_size_S" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/viewpager"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+</LinearLayout>

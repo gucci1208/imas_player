@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.gucci1208.imas_player"
+    android:versionCode="1"
+    android:versionName="1.0.0" >
+
+    <uses-sdk
+        android:minSdkVersion="8"
+        android:targetSdkVersion="19" />
+
+	<uses-permission android:name="android.permission.INTERNET" />
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name="SelectActivity"
+            android:screenOrientation="unspecified">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="PlayActivity"
+            android:exported="false"
+            android:screenOrientation="unspecified">
+        </activity>
+
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundInSelect"/>
+
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN0"/>
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN1"/>
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN2"/>
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN3"/>
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN4"/>
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN5"/>
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN6"/>
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN7"/>
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN8"/>
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN9"/>
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN10"/>
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN11"/>
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN12"/>
+
+    </application>
+
+</manifest>

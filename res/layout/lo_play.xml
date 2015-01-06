@@ -1,0 +1,177 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/yellow"
+    android:orientation="vertical" >
+
+    <!-- 音声選択の左右ボタン -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/padding_size_S"
+        android:paddingTop="@dimen/padding_size_M" >
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_button_sound_back"
+            android:onClick="RETURN"
+            android:text="@string/play_text01"
+            android:textColor="@color/bt_main_text"
+            android:textSize="@dimen/font_size_SS" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="@dimen/padding_size_S"
+            android:paddingTop="@dimen/padding_size_S"
+            android:text="@string/navibar_main"
+            android:textColor="@color/navibar_text"
+            android:textSize="@dimen/font_size_S"
+            android:visibility="invisible" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bt_button_sound_next"
+            android:text="@string/main_text01"
+            android:textColor="@color/bt_main_text"
+            android:textSize="@dimen/font_size_SS"
+            android:visibility="invisible" />
+    </LinearLayout>
+
+    <HorizontalScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fastScrollEnabled="true" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/bt1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/rtk_on" />
+
+            <ImageView
+                android:id="@+id/bt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/hbk_on" />
+
+            <ImageView
+                android:id="@+id/bt3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/tkn_on" />
+
+            <ImageView
+                android:id="@+id/bt4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/ior_on" />
+
+            <ImageView
+                android:id="@+id/bt5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="16dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/yyi_on" />
+
+            <ImageView
+                android:id="@+id/bt6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:src="@drawable/chy_on" />
+
+            <ImageView
+                android:id="@+id/bt7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/hrk_on"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/bt8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/mk_on"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/bt9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/mkt_on"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/bt10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/ykh_on"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/bt11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/ammm_on"
+                android:scaleType="fitXY" />
+
+            <ImageView
+                android:id="@+id/bt12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:adjustViewBounds="true"
+                android:background="@drawable/azs_on"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:layout_width="40dp"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </HorizontalScrollView>
+
+</LinearLayout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">imas_player</string>
+
+    <string name="play_text01">戻る</string>
+
+    <string name="main_text01">全て止める</string>
+    <string name="navibar_main">音をならす</string>
+
+    <string-array name="sound_names">
+      <item>CHANGE!!!!</item>
+      <item>Brand New Day!</item>
+    </string-array>
+
+</resources>

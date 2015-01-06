@@ -1,0 +1,16 @@
+<resources>
+
+    <dimen name="padding_size_SS">12dp</dimen>
+    <dimen name="padding_size_S">20dp</dimen>
+    <dimen name="padding_size_M">28dp</dimen>
+    <dimen name="padding_size_L">40dp</dimen>
+    <dimen name="padding_size_LL">52dp</dimen>
+    <dimen name="padding_size_LLL">100dp</dimen>
+    <dimen name="font_size_SSS">16sp</dimen>
+    <dimen name="font_size_SS">22sp</dimen>
+    <dimen name="font_size_S">30sp</dimen>
+    <dimen name="font_size_M">38sp</dimen>
+    <dimen name="font_size_L">48sp</dimen>
+    <dimen name="font_size_LL">60sp</dimen>
+
+</resources>

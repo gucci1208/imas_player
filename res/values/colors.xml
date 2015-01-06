@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#ffffff</color>
+    <color name="green">#94cb08</color>
+    <color name="yellow">#fffbcf</color>
+    <color name="navibar_text">#663b14</color>
+    <color name="navibar_back">#ffeb5c</color>
+    <color name="bt_main_text">#663b14</color>
+
+    <color name="list_back_white">#ffffff</color>
+    <color name="list_back_purple">#dcd7ff</color>
+    <color name="result_text">#ff5471</color>
+    <color name="main_text">#333333</color>
+    <color name="text_white">#ffffff</color>
+    <color name="bt_blue_text">#ffffff</color>
+    <color name="list_back_green">#8ee555</color>
+    <color name="list_back_orange">#ffba55</color>
+    <color name="list_back_appli">#ffeeee</color>
+    <color name="list_back_appli_on">#ffaaaa</color>
+    <color name="list_text_white">#ffffff</color>
+    <color name="list_text_main">#000000</color>
+    <color name="detail_text_pink">#ff3399</color>
+    <color name="schedule_text_blue">#3399cc</color>
+    <color name="schedule_back_blue">#b1e0ff</color>
+    <color name="setting_text_grey">#aaaaaa</color>
+
+</resources>
