@@ -32,20 +32,7 @@
         </activity>
 
         <service android:name="com.gucci1208.imas_player.service.PlaySoundInSelect"/>
-
-        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN0"/>
-        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN1"/>
-        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN2"/>
-        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN3"/>
-        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN4"/>
-        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN5"/>
-        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN6"/>
-        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN7"/>
-        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN8"/>
-        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN9"/>
-        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN10"/>
-        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN11"/>
-        <service android:name="com.gucci1208.imas_player.service.PlaySoundMAIN12"/>
+        <service android:name="com.gucci1208.imas_player.service.PlaySoundMain"/>
 
     </application>
 

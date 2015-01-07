@@ -15,7 +15,6 @@ import android.widget.LinearLayout;
 
 import com.gucci1208.imas_player.PlayActivity;
 import com.gucci1208.imas_player.R;
-import com.gucci1208.imas_player.model.Const;
 import com.gucci1208.imas_player.model.ModelSound;
 import com.gucci1208.imas_player.service.PlaySoundInSelect;
 

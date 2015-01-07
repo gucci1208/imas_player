@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -43,8 +42,7 @@ public class SelectActivity extends Activity {
 
 		//オフボーカル音源を再生
 		stopService(new Intent(getApplicationContext(), PlaySoundInSelect.class));
-		Intent serviceIntent = null;
-		serviceIntent = new Intent(getApplicationContext(), PlaySoundInSelect.class);
+		Intent serviceIntent = new Intent(getApplicationContext(), PlaySoundInSelect.class);
 		serviceIntent.putExtra("SOUND_CODE", Const.SOUND_CODE[now_page]);
 		startService(serviceIntent);
 	}
@@ -53,11 +51,6 @@ public class SelectActivity extends Activity {
 		viewPager = (ViewPager) findViewById(R.id.viewpager);
 		PagerAdapter mPagerAdapter = new AdapterPager(this, sound_datas);
 		viewPager.setAdapter(mPagerAdapter);
-
-		//前後のページを見られるようにする：http://www.repica.jp/staffblog/tech/2013/08/01/1064/
-		int margin = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 100 * 2, getResources().getDisplayMetrics());
-		viewPager.setPageMargin(-margin);
-		viewPager.setOffscreenPageLimit(3);
 
 		//ページが変わったことを受け取るイベント
 		viewPager.setOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {

@@ -1,86 +1,51 @@
 package com.gucci1208.imas_player;
 
+import java.io.IOException;
+
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
 import android.widget.ImageView;
 
-import com.gucci1208.imas_player.service.PlaySoundMAIN0;
+import com.gucci1208.imas_player.model.Const;
+import com.gucci1208.imas_player.service.PlaySoundInSelect;
+import com.gucci1208.imas_player.service.PlaySoundMain;
 
 public class PlayActivity extends Activity {
 	private int now_page;
 
-	private ImageView bt1;
-	private ImageView bt2;
-	private ImageView bt3;
-	private ImageView bt4;
-	private ImageView bt5;
-	private ImageView bt6;
-	private ImageView bt7;
-	private ImageView bt8;
-	private ImageView bt9;
-	private ImageView bt10;
-	private ImageView bt11;
-	private ImageView bt12;
+	private boolean[] playing;
+	private ImageView[] bt;
 
-	private boolean playing1;
-	private boolean playing2;
-	private boolean playing3;
-	private boolean playing4;
-	private boolean playing5;
-	private boolean playing6;
-	private boolean playing7;
-	private boolean playing8;
-	private boolean playing9;
-	private boolean playing10;
-	private boolean playing11;
-	private boolean playing12;
+	MediaPlayer[] mp;
 
-	private Intent serviceIntent0;
-	private Intent serviceIntent1;
-	private Intent serviceIntent2;
-	private Intent serviceIntent3;
-	private Intent serviceIntent4;
-	private Intent serviceIntent5;
-	private Intent serviceIntent6;
-	private Intent serviceIntent7;
-	private Intent serviceIntent8;
-	private Intent serviceIntent9;
-	private Intent serviceIntent10;
-	private Intent serviceIntent11;
-	private Intent serviceIntent12;
+	private Intent serviceIntent;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.lo_select);
 
-		bt1 = (ImageView)findViewById(R.id.bt1);
-		bt2 = (ImageView)findViewById(R.id.bt2);
-		bt3 = (ImageView)findViewById(R.id.bt3);
-		bt4 = (ImageView)findViewById(R.id.bt4);
-		bt5 = (ImageView)findViewById(R.id.bt5);
-		bt6 = (ImageView)findViewById(R.id.bt6);
-		bt7 = (ImageView)findViewById(R.id.bt7);
-		bt8 = (ImageView)findViewById(R.id.bt8);
-		bt9 = (ImageView)findViewById(R.id.bt9);
-		bt10 = (ImageView)findViewById(R.id.bt10);
-		bt11 = (ImageView)findViewById(R.id.bt11);
-		bt12 = (ImageView)findViewById(R.id.bt12);
-
 		//とりあえず全部falseで
-		playing1 = false;
-		playing2 = false;
-		playing3 = false;
-		playing4 = false;
-		playing5 = false;
-		playing6 = false;
-		playing7 = false;
-		playing8 = false;
-		playing9 = false;
-		playing10 = false;
-		playing11 = false;
-		playing12 = false;
+		playing = new boolean[12];
+		for (int i = 0; i < playing.length; i++) {
+			playing[i] = false;
+		}
+
+		bt = new ImageView[12];
+		for (int i = 0; i < bt.length; i++) {
+			//bt[i] = (ImageView)findViewById(R.id.bt1);
+			//bt1～bt12のImageViewのIDを文字列から取得する
+			int viewId = getResources().getIdentifier("bt" + (i + 1), "id", getPackageName());
+			bt[i] = (ImageView)findViewById(viewId);
+		}
 
 		//画像をセット
 		setButtonImage();
@@ -89,12 +54,176 @@ public class PlayActivity extends Activity {
 		now_page = intent.getIntExtra("PAGE", 0);
 
 		//処理によるラグを減らすために、極力ここで処理をやっちゃう
-
-		//再生するサービスの準備
-		serviceIntent0 = new Intent(this, PlaySoundMAIN0.class);
-
+		//旧データをリストア
+		ProgressDialog mProgress =null;
+		Handler mHandler = new Handler();
+		mProgress = new ProgressDialog(this);
+		mProgress.setMessage("   ");
+		mProgress.show();
+		prepareSounds t = new prepareSounds(this, mHandler, mProgress);
+		t.start();
 	}
 
 	private void setButtonImage() {
+		//ボタンに画像をセットする
+		for (int i = 0; i < bt.length; i++) {
+
+			//文字列から画像のdrawableのIDを取得する
+			int image_id_on		= getResources().getIdentifier(Const.CHARA_CODE[i] + "_on", "drawable", getPackageName());
+			int image_id_off	= getResources().getIdentifier(Const.CHARA_CODE[i] + "_off", "drawable", getPackageName());
+			System.out.println("image_id_on:" + image_id_on);
+			System.out.println("image_id_off:" + image_id_off);
+			//bt[i].setImageResource(image_id_on);
+
+			if (!playing[i]) {
+				//bt[i].setImageResource(image_id_off);
+			}
+
+			//クリックリスナー
+			final int inner_id = i;
+			/*
+			bt[i].setOnClickListener(new View.OnClickListener() {
+				@Override
+				public void onClick(View v) {
+					playing[inner_id] = !playing[inner_id];
+					setButtonImage();
+				}
+			});
+			*/
+		}
 	}
+
+	private class prepareSounds extends Thread {
+		Handler mHandler;
+		ProgressDialog mProgress;
+
+		public prepareSounds(Context context, Handler mHandler, ProgressDialog mProgress) {
+			this.mHandler = mHandler;
+			this.mProgress = mProgress;
+
+			mp = new MediaPlayer[13];
+
+			//再生するサービスの準備
+			serviceIntent = new Intent(context, PlaySoundMain.class);
+		}
+
+		//時間がかかる処理
+		public void run() {
+			try {
+				//曲コードを取得
+				String sound_code = Const.SOUND_CODE[now_page];
+
+				//MediaPlayerの準備
+				AssetFileDescriptor[] afd = new AssetFileDescriptor[13];
+				for (int i = 0; i < mp.length; i++) {
+					mp[i] = new MediaPlayer();
+
+					//読み込む音声ファイルの名前
+					String mp3_filename = "";
+					if (i == 0) {
+						mp3_filename = sound_code + "_off.mp3";
+					}
+					else {
+						mp3_filename = sound_code + "_" + Const.CHARA_CODE[i - 1] + ".mp3";
+					}
+					//コードから音源を取得する
+					afd[i] = getAssets().openFd(mp3_filename);
+					mp[i].setDataSource(afd[i].getFileDescriptor(), afd[i].getStartOffset(), afd[i].getLength());
+					mp[i].prepare();
+
+					//ループ設定
+					mp[i].setLooping(true);
+
+					//ボリューム設定で左右のパンをふる（0～1のfloat値）
+					int num = mp.length - 1;
+					float per = 1.0f / num;
+
+					if (i == 0) {
+						mp[i].setVolume(1.0f, 1.0f);
+					}
+					else {
+						float left = 1.0f - (i - 1) * per;
+						float right = (i - 1) * per;
+						if (left > 1.0f) {
+							left = 1.0f;
+						}
+						if (right > 1.0f) {
+							right = 1.0f;
+						}
+						if (left < 0) {
+							left = 0;
+						}
+						if (right < 0) {
+							right = 0;
+						}
+						mp[i].setVolume(left, right);
+					}
+				}
+			} catch (IllegalArgumentException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			} catch (IllegalStateException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			} catch (IOException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+
+			// スレッドが終了した場合、終了したことをHandlerに知らせる。
+			mHandler.post(new Runnable() {
+				public void run() {
+					// ダイアログを消す
+					mProgress.dismiss();
+
+					//再生開始
+					startService(serviceIntent);
+				}
+			});
+		}
+	}
+
+	private class PlaySoundMAIN extends Service {
+		@Override
+		public IBinder onBind(Intent intent) {
+			return null;
+		}
+
+		@Override
+		public void onCreate() {
+			super.onCreate();
+		}
+
+		@Override
+		public int onStartCommand(Intent intent, int flags, int startId) {
+			System.out.println("aaaaaaaaaaa");
+			for (int i = 0; i < mp.length; i++) {
+				System.out.println("i:" + i);
+				mp[i].start();
+			}
+
+			return START_STICKY;
+		}
+
+		@Override
+		public void onDestroy() {
+			super.onDestroy();
+
+			for (int i = 0; i < mp.length; i++) {
+				System.out.println("mp[" + i + "].isPlaying():" + mp[i].isPlaying());
+				if (mp[i].isPlaying()) {
+					mp[i].stop();
+				}
+			}
+		}
+	}
+
+	@Override
+	public void onDestroy() {
+		super.onDestroy();
+
+		//終了時に停止させる
+		stopService(new Intent(getApplicationContext(), PlaySoundMain.class));
+	}
+
 }
